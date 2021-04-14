@@ -1,3 +1,4 @@
+// local array of menu item objects
 const menu = [
   {
     id: 1,
@@ -72,3 +73,14 @@ const menu = [
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
 ];
+
+const selectionCenter = document.querySelector(".section-center");
+
+// listen for DOM content to be loaded:
+window.addEventListener("DOMContentLoaded", function () {
+  let displayMenu = menu.map(function (item) {
+    //console.log(item);
+    return `<h1>${item.title}</h1>`;
+  });
+  console.log(displayMenu);
+});
