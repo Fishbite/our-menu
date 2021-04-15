@@ -78,9 +78,25 @@ const selectionCenter = document.querySelector(".section-center");
 
 // listen for DOM content to be loaded:
 window.addEventListener("DOMContentLoaded", function () {
-  let displayMenu = menu.map(function (item) {
-    //console.log(item);
-    return `<h1>${item.title}</h1>`;
-  });
-  console.log(displayMenu);
+  displayMenuItems(menu);
 });
+
+function displayMenuItems(menuItems) {
+  let displayMenu = menu.map(function (item) {
+    // for each item: return a string with data from the 'menu' array inserted
+    return `<article class="menu-item">
+    <img src=${item.img} class="photo" alt="${item.title}" />
+    <div class="item-info">
+      <header>
+        <h4>${item.title}</h4>
+        <h4 class="price">$${item.price}</h4>
+      </header>
+      <p class="item-text">
+        ${item.desc}
+      </p>
+    </div>
+  </article>`;
+  });
+  displayMenu = displayMenu.join(""); // make string from array
+  selectionCenter.innerHTML = displayMenu;
+}
