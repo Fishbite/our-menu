@@ -76,13 +76,37 @@ const menu = [
 
 const selectionCenter = document.querySelector(".section-center");
 
-// listen for DOM content to be loaded:
+const filterBtns = document.querySelectorAll(".filter-btn");
+
+// listen for DOM content to be loaded
+//load items
 window.addEventListener("DOMContentLoaded", function () {
   displayMenuItems(menu);
 });
 
+// filter items
+filterBtns.forEach(function (btn) {
+  btn.addEventListener("click", function (event) {
+    console.log(event.currentTarget.dataset.id);
+    const category = event.currentTarget.dataset.id;
+    const menuCategory = menu.filter(function (menuItem) {
+      console.log(menuItem.category);
+      if (menuItem.category === category) {
+        return menuItem;
+      }
+    });
+    console.log(menuCategory);
+    if (category === "all") {
+      console.log("All!!!!!");
+      displayMenuItems(menu);
+    } else {
+      displayMenuItems(menuCategory);
+    }
+  });
+});
+
 function displayMenuItems(menuItems) {
-  let displayMenu = menu.map(function (item) {
+  let displayMenu = menuItems.map(function (item) {
     // for each item: return a string with data from the 'menu' array inserted
     return `<article class="menu-item">
     <img src=${item.img} class="photo" alt="${item.title}" />
@@ -97,6 +121,7 @@ function displayMenuItems(menuItems) {
     </div>
   </article>`;
   });
+
   displayMenu = displayMenu.join(""); // make string from array
   selectionCenter.innerHTML = displayMenu;
 }
